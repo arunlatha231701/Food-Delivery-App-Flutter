@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:f_deli_very/OnBoardingScreens/onBoardScreen.dart';
 import 'package:f_deli_very/HomeLandingScreen.dart';
 import 'package:firebase_core/firebase_core.dart';

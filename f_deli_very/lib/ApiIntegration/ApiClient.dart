@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'dart:async';
 class ApiClient {
-  Future getData(String path) async {
+  FutureOr getData(String path) async {
     try {
        final response = await Dio(BaseOptions(baseUrl: "https://reqres.in"))
            .get("/api/users?page=2");
