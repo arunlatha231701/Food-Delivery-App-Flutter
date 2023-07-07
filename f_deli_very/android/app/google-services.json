@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "826312714355",
+    "project_id": "flutter-fire-base-9083a",
+    "storage_bucket": "flutter-fire-base-9083a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826312714355:android:93da4a007a94b439266206",
+        "android_client_info": {
+          "package_name": "com.example.arun_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826312714355-fkm5ppdd4k42l78c5vmkrggbqkm21055.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_80XWCCzSFwotAJZIoipFLXVSGiBhHfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826312714355-fkm5ppdd4k42l78c5vmkrggbqkm21055.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "826312714355-d6fnqc0tr94cdv4uo4s0ke92f94gefip.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fDeliVery"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826312714355:android:ae3d44d1e2f4b0ee266206",
+        "android_client_info": {
+          "package_name": "com.example.f_deli_very"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826312714355-fkm5ppdd4k42l78c5vmkrggbqkm21055.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_80XWCCzSFwotAJZIoipFLXVSGiBhHfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826312714355-fkm5ppdd4k42l78c5vmkrggbqkm21055.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "826312714355-d6fnqc0tr94cdv4uo4s0ke92f94gefip.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fDeliVery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
