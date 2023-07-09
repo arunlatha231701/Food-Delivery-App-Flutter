@@ -17,52 +17,108 @@ class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late String UserName;
 
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _saveDataInSharedPreferences();
   }
-  void _saveDataInSharedPreferences()async{
-    final SharedPreferences preferences= await SharedPreferences.getInstance();
+
+  void _saveDataInSharedPreferences() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      UserName =(preferences.getString("userId")??null)!;
+      UserName = (preferences.getString("userId") ?? null)!;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.white,
-            pinned: true,
-            floating: true,
-            snap: true,
-            leading: const Icon(
-              Icons.my_location,
-              color: Colors.deepOrangeAccent,
-            ),
-            actions: [
+      body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (context, scrolled) => [
+                SliverAppBar(
+                  backgroundColor: Colors.white,
+                  pinned: true,
+                  floating: true,
+                  snap: true,
+                  leading: const Icon(
+                    Icons.my_location,
+                    color: Colors.deepOrangeAccent,
+                  ),
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(0.0),
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      height: 100,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  /*actions: [
               IconButton(
                 icon: Icon(Icons.comment),
                 tooltip: 'Comment Icon',
                 onPressed: () {},
               ),
-            ],
-            expandedHeight: MediaQuery.of(context).size.height * 0.1,
+            ],*/
+                  /*expandedHeight: MediaQuery.of(context).size.height * 0.1,
             flexibleSpace:  FlexibleSpaceBar(
               title: Text(
                 '$UserName',
                 style: TextStyle(color: Colors.black),
               ),
               centerTitle: true,
+            ),*/
+                ),
+              ],
+          body: SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    color: Colors.red,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Hello EveryOne",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    color: Colors.blue,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Hello EveryOne",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    color: Colors.green,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Hello EveryOne",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            /*Container(
+          )
+
+          /*SliverList(
+          delegate: SliverChildListDelegate([
+            */ /*Container(
               height:MediaQuery.of(context).size.height * 2,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder<List<UserDetails>>(
@@ -86,43 +142,10 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-            ),*/
-            Container(
-              width: MediaQuery.of(context).size.width * 0.85,
-              height: MediaQuery.of(context).size.height * 0.5,
-              color: Colors.red,
-              alignment: Alignment.center,
-              child:const Text(
-                "Hello EveryOne",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-              ),
-            ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  color: Colors.blue,
-                  alignment: Alignment.center,
-                  child:const Text(
-                    "Hello EveryOne",
-                    style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  color: Colors.green,
-                  alignment: Alignment.center,
-                  child:const Text(
-                    "Hello EveryOne",
-                    style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-                  ),
-                ),
-          ]))
-        ],
-      )
+            ),*/ /*
+
+          ])),*/
+          )
       /*Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,

@@ -29,9 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
-      home:
-
-      const SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
@@ -59,10 +57,10 @@ _init() async{
   if(login_user !=null){
     Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const BottomNavigationPage()));
   }else{
-    Future.delayed(const Duration(seconds: 3)).then((value) => {
+
+   await Future.delayed(const Duration(seconds: 3)).then((value) => {
       Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const OnBoardingPage()))
     });
-
   }
 }
   @override
