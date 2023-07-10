@@ -34,7 +34,92 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
+        body: CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          backgroundColor: Colors.white,
+          pinned: true,
+          snap: true,
+          floating: true,
+          expandedHeight: 100,
+          title:Text(
+            "Arun",
+            style: TextStyle(color: Colors.orangeAccent, fontSize: 24),
+          ),
+          actions: [
+
+          ],
+          bottom: AppBar(
+            backgroundColor: Colors.white,
+            title: Container(
+                height: 45,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      margin:const EdgeInsets.only(left: 5.0),
+                      child: Text(
+                        "Search  for dishes,restaurants",
+                        style: TextStyle(
+                          color: Colors.grey.shade400,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.search_outlined,
+                      color: Colors.grey.shade400,
+                      size: 14,
+                    ),
+
+                  ],
+                )),
+          ),
+        ),
+        /*SliverGrid(
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
+              return Container(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: MediaQuery.of(context).size.height * 0.5,
+                color: Colors.red,
+                alignment: Alignment.center,
+                child: const Text(
+                  "Hello EveryOne",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+              );
+            }),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, childAspectRatio: 1))*/
+        SliverList(
+            delegate: SliverChildListDelegate([
+          Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.green,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.red,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.orange,
+          ),
+        ])),
+      ],
+    ));
+  }
+}
+/*NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, scrolled) => [
                 SliverAppBar(
@@ -55,21 +140,21 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey,
                     ),
                   ),
-                  /*actions: [
+                  */ /*actions: [
               IconButton(
                 icon: Icon(Icons.comment),
                 tooltip: 'Comment Icon',
                 onPressed: () {},
               ),
-            ],*/
-                  /*expandedHeight: MediaQuery.of(context).size.height * 0.1,
+            ],*/ /*
+                  */ /*expandedHeight: MediaQuery.of(context).size.height * 0.1,
             flexibleSpace:  FlexibleSpaceBar(
               title: Text(
                 '$UserName',
                 style: TextStyle(color: Colors.black),
               ),
               centerTitle: true,
-            ),*/
+            ),*/ /*
                 ),
               ],
           body: SingleChildScrollView(
@@ -116,9 +201,9 @@ class _HomePageState extends State<HomePage> {
             ),
           )
 
-          /*SliverList(
+          */ /*SliverList(
           delegate: SliverChildListDelegate([
-            */ /*Container(
+            */ /* */ /*Container(
               height:MediaQuery.of(context).size.height * 2,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder<List<UserDetails>>(
@@ -142,11 +227,11 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-            ),*/ /*
+            ),*/ /* */ /*
 
-          ])),*/
-          )
-      /*Container(
+          ])),*/ /*
+          )*/
+/*Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Colors.white,
@@ -169,7 +254,3 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       )*/
-      ,
-    );
-  }
-}
