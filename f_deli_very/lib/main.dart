@@ -66,8 +66,7 @@ _init() async{
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body:
-      SizedBox(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

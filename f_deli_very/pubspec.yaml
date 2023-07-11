@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^4.8.1
   shared_preferences: ^2.1.2
   dio: ^5.2.1+1
+  ionicons: ^0.2.2
 
 
 dev_dependencies:

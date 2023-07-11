@@ -42,40 +42,94 @@ class _HomePageState extends State<HomePage> {
           snap: true,
           floating: true,
           expandedHeight: 100,
-          title:Text(
-            "Arun",
-            style: TextStyle(color: Colors.orangeAccent, fontSize: 24),
+          title: Column(
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.my_location_outlined,
+                    color: Colors.deepOrangeAccent,
+                    size: 18,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  const Flexible(
+                    child: Text(
+                      "b-14,kumaran colony ammapalayam,tirupur",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: Colors.grey.shade200,
+                  )
+                ],
+              ),
+              Text(
+                "b-14,kumaran colony ammapalayam,tirupur",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16),
+              )
+            ],
           ),
-          actions: [
 
-          ],
+          /*const Icon(
+            Icons.my_location_outlined,
+            color: Colors.deepOrangeAccent,
+            size: 18,
+          ),*/
+
           bottom: AppBar(
             backgroundColor: Colors.white,
             title: Container(
                 height: 45,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Row(
                   children: [
-                    Container(
-                      margin:const EdgeInsets.only(left: 5.0),
-                      child: Text(
-                        "Search  for dishes,restaurants",
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 14,
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.only(left: 5.0),
+                        child: Text(
+                          "Search  for dishes,restaurants",
+                          style: TextStyle(
+                            color: Colors.grey.shade400,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),
                     Icon(
                       Icons.search_outlined,
                       color: Colors.grey.shade400,
-                      size: 14,
+                      size: 24,
                     ),
-
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: VerticalDivider(
+                        color: Colors.grey.shade400,
+                        thickness: 1,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: Icon(
+                        Icons.mic,
+                        color: Colors.deepOrangeAccent,
+                        size: 21,
+                      ),
+                    ),
                   ],
                 )),
           ),
