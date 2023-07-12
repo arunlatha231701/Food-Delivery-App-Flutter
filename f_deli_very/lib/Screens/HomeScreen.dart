@@ -1,6 +1,8 @@
 import 'package:f_deli_very/ApiIntegration/UserApiCall.dart';
 import 'package:f_deli_very/ModelClass/UserDetails.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,146 +33,151 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  var constraints = Constraints;
+  late ScrollController _scrollController;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          backgroundColor: Colors.white,
-          pinned: true,
-          snap: true,
-          floating: true,
-          expandedHeight: 100,
-          title: Column(
-            children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.my_location_outlined,
-                    color: Colors.deepOrangeAccent,
-                    size: 18,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Flexible(
-                    child: Text(
-                      "b-14,kumaran colony ammapalayam,tirupur",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Colors.grey.shade200,
-                  )
-                ],
-              ),
-              Text(
-                "b-14,kumaran colony ammapalayam,tirupur",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16),
-              )
-            ],
-          ),
-
-          /*const Icon(
-            Icons.my_location_outlined,
-            color: Colors.deepOrangeAccent,
-            size: 18,
-          ),*/
-
-          bottom: AppBar(
+    return SafeArea(
+      child: Scaffold(
+          body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
             backgroundColor: Colors.white,
-            title: Container(
-                height: 45,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
+            pinned: true,
+            snap: true,
+            floating: true,
+            expandedHeight: 100,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                color: Colors.white,
+              ),
+            ),
+            title: Column(
+              children: [
+                Row(
                   children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        margin: const EdgeInsets.only(left: 5.0),
-                        child: Text(
-                          "Search  for dishes,restaurants",
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
-                            fontSize: 14,
-                          ),
-                        ),
+                    const Icon(
+                      Icons.my_location_outlined,
+                      color: Colors.deepOrangeAccent,
+                      size: 18,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Flexible(
+                      child: Text(
+                        "b-14,kumaran colony ammapalayam,tirupur",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            overflow: TextOverflow.ellipsis),
                       ),
                     ),
                     Icon(
-                      Icons.search_outlined,
-                      color: Colors.grey.shade400,
-                      size: 24,
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.grey.shade500,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: VerticalDivider(
-                        color: Colors.grey.shade400,
-                        thickness: 1,
-                      ),
+                    const SizedBox(
+                      width: 5,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 20),
-                      child: Icon(
-                        Icons.mic,
-                        color: Colors.deepOrangeAccent,
-                        size: 21,
-                      ),
+                    Icon(
+                      Icons.person_pin,
+                      color: Colors.grey.shade500,
                     ),
                   ],
-                )),
-          ),
-        ),
-        /*SliverGrid(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: MediaQuery.of(context).size.height * 0.5,
-                color: Colors.red,
-                alignment: Alignment.center,
-                child: const Text(
-                  "Hello EveryOne",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
-              );
-            }),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1, childAspectRatio: 1))*/
-        SliverList(
-            delegate: SliverChildListDelegate([
-          Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.green,
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "B-14,Kumaran colony ammapalayam,tirupur",
+                    style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14),
+                  ),
+                )
+              ],
+            ),
+
+            /*const Icon(
+              Icons.my_location_outlined,
+              color: Colors.deepOrangeAccent,
+              size: 18,
+            ),*/
+
+            bottom: AppBar(
+              backgroundColor: Colors.white,
+              title: Container(
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          margin: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            "Search  for dishes,restaurants",
+                            style: TextStyle(
+                              color: Colors.grey.shade400,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.search_outlined,
+                        color: Colors.grey.shade400,
+                        size: 24,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: VerticalDivider(
+                          color: Colors.grey.shade400,
+                          thickness: 1,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        child: Icon(
+                          Icons.mic,
+                          color: Colors.deepOrangeAccent,
+                          size: 21,
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.red,
+          SliverPadding(
+            padding:const EdgeInsets.symmetric(horizontal: 10),
+            sliver: SliverGrid(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return Card(
+                      color: Colors.grey.shade100,
+                      child: Container(
+                          alignment: Alignment.center,
+                          child: const FittedBox(
+                            child: Image(
+                                image: AssetImage(
+                              "assets/food_delivery_logo.png",
+                            )),
+                          )));
+                }, childCount: 3),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 1.3)),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.orange,
-          ),
-        ])),
-      ],
-    ));
+        ],
+      )),
+    );
   }
 }
 /*NestedScrollView(

@@ -42,12 +42,12 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
                     ? const Icon(
                         Icons.home_filled,
                         color: Colors.orange,
-                        size: 26,
+                        size: 23,
                       )
                     : const Icon(
                         Icons.home_outlined,
                         color: Colors.grey,
-                        size: 23,
+                        size: 21,
                       ),
                    label:  'Home'
              ),
@@ -56,36 +56,36 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
                     ? const Icon(
                         Icons.list_rounded,
                         color: Colors.orange,
-                        size: 26,
+                        size: 23,
                       )
                     : const Icon(
                         Icons.list_alt_sharp,
                         color: Colors.grey,
-                        size: 23,
+                        size: 21,
                       ),label: 'Orders'),
             BottomNavigationBarItem(
                 icon: pageIndex == 2
                     ? const Icon(
                         Icons.shopping_bag_rounded,
                         color: Colors.orange,
-                        size: 26,
+                        size: 23,
                       )
                     : const Icon(
                         Icons.shopping_bag_outlined,
                         color: Colors.grey,
-                        size: 23,
+                        size: 21,
                       ),label: 'My list'),
             BottomNavigationBarItem(
                 icon: pageIndex == 3
                     ? const Icon(
                         Icons.person_2_rounded,
                         color: Colors.orange,
-                        size: 26,
+                        size: 23,
                       )
                     : const Icon(
                         Icons.person_2_outlined,
                         color: Colors.grey,
-                        size: 23,
+                        size: 21,
                       ),label: 'Profile')
           ],
           onTap: (int i) {

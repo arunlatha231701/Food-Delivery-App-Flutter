@@ -13,7 +13,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -26,9 +25,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
-        useMaterial3: true,
-      ),
+          primaryColor: Colors.white,
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(color: Colors.white)),
       home: const SplashScreen(),
     );
   }
@@ -42,27 +41,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final auth = FirebaseAuth.instance;
 
-final auth = FirebaseAuth.instance;
-
- @override
+  @override
   void initState() {
-   super.initState();
-   final user = auth.currentUser;
-   _init();
- }
-_init() async{
-  SharedPreferences preferences =await SharedPreferences.getInstance();
-  final login_user = preferences.get("userId");
-  if(login_user !=null){
-    Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const BottomNavigationPage()));
-  }else{
-
-   await Future.delayed(const Duration(seconds: 3)).then((value) => {
-      Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const OnBoardingPage()))
-    });
+    super.initState();
+    final user = auth.currentUser;
+    _init();
   }
-}
+
+  _init() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final login_user = preferences.get("userId");
+    if (login_user != null) {
+      Navigator.of(context).pushReplacement(CupertinoPageRoute(
+          builder: (context) => const BottomNavigationPage()));
+    } else {
+      await Future.delayed(const Duration(seconds: 3)).then((value) => {
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(
+                builder: (context) => const OnBoardingPage()))
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -71,8 +72,9 @@ _init() async{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-                Image(image: AssetImage("assets/food_delivery_logo.png")),
-          ],),
+            Image(image: AssetImage("assets/food_delivery_logo.png")),
+          ],
+        ),
       ),
     );
   }
