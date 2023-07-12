@@ -163,11 +163,14 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey.shade100,
                       child: Container(
                           alignment: Alignment.center,
-                          child: const FittedBox(
-                            child: Image(
-                                image: AssetImage(
-                              "assets/food_delivery_logo.png",
-                            )),
+                          child:const Padding(
+                            padding:  EdgeInsets.all(8.0),
+                            child:  FittedBox(
+                              child: Image(
+                                  image: AssetImage(
+                                "assets/burger.png",
+                              )),
+                            ),
                           )));
                 }, childCount: 3),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
