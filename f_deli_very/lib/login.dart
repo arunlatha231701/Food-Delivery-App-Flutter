@@ -1,8 +1,9 @@
 import 'package:f_deli_very/HomeLandingScreen.dart';
+import 'package:f_deli_very/ModelClass/UserDetailsRealm.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:realm/realm.dart';
 class LoginScreenPage extends StatefulWidget {
   const LoginScreenPage({Key? key}) : super(key: key);
 
@@ -257,7 +258,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         ),
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            formKey.currentState!.save();
+                              formKey.currentState!.save();
                             signIn(context);
                             print("valid");
                           }

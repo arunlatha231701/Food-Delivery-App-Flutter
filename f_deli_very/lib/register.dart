@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_deli_very/ModelClass/UserDetailsRealm.dart';
 import 'package:f_deli_very/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:realm/realm.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -23,7 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   FocusNode userNameFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
-
+  final config = Configuration.local([ModelUserDetailsRealm.schema]);
+  late final realm = Realm(config);
   void _saveDataInFireStoreCloud() {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     firestoreInstance.collection("user").doc(firebaseUser?.uid).set({
@@ -35,7 +37,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           MaterialPageRoute(builder: (context) => const LoginScreenPage()));
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -303,6 +304,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         onTap: () {
                           if(formKey.currentState!.validate()){
+
+                            var userDetails = ModelUserDetailsRealm(_nameTextEditingController.text, _emailTextEditingController.text, _passwordTextEditingController.text);
+                            realm.write((){
+                              realm.add(userDetails);
+                            });
+
                             formKey.currentState!.save();
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
