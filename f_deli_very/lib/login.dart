@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:realm/realm.dart';
+
 class LoginScreenPage extends StatefulWidget {
   const LoginScreenPage({Key? key}) : super(key: key);
 
@@ -143,7 +144,8 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                                 borderSide: BorderSide(
                                     color: Colors.grey.shade200,
                                     style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,width: 1)),
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    width: 1)),
                             errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
@@ -258,7 +260,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         ),
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
+                            formKey.currentState!.save();
                             signIn(context);
                             print("valid");
                           }
