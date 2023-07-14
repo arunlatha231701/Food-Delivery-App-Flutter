@@ -1,3 +1,4 @@
+import 'package:f_deli_very/CustomizedWidgets/CustomizedButton.dart';
 import 'package:f_deli_very/CustomizedWidgets/CustomizedTextFormField.dart';
 import 'package:f_deli_very/HomeLandingScreen.dart';
 import 'package:f_deli_very/ModelClass/UserDetailsRealm.dart';
@@ -93,7 +94,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         child: CustomizedTextFormField(
                           controller: _emailTextEditingController,
                           focusNode: emailFocusNode,
-                          hintText: "Enter email ",
+                          hintText: "Email",
                           textInputType: TextInputType.text,
                           prefixIcon: Icons.person_2_outlined,
                           focusNodeNext: passwordFocusNode,
@@ -112,7 +113,6 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          name: 'Username',
                         ),
                       ),
                       Container(
@@ -121,14 +121,14 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         margin: const EdgeInsets.only(
                           bottom: 32,
                         ),
-                        child:  CustomizedTextFormField(
+                        child: CustomizedTextFormField(
                           focusNodeNext: null,
                           obscureText: true,
                           focusNode: passwordFocusNode,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           prefixIcon: Icons.lock_outline_rounded,
                           textInputType: TextInputType.visiblePassword,
-                          hintText: 'Enter Password',
+                          hintText: 'Password',
                           controller: _passwordTextEditingController,
                           validator: (password) {
                             if (password!.isEmpty) {
@@ -138,49 +138,22 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                             }
                             return null;
                           },
-                          onsaved: (value){
+                          onsaved: (value) {
                             _passwordTextEditingController.text = value!;
-                          }, name: 'Password',
-                        )
-
-                        ,
-                      ),
-                      InkWell(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          height: 55,
-                          margin: const EdgeInsets.only(
-                            bottom: 20,
-                          ),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: Colors.deepOrangeAccent,
-                              borderRadius: BorderRadius.circular(50)),
-                          child: const Text(
-                            "Sign In",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                                color: Colors.white),
-                          ),
+                          },
                         ),
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            /* if (_emailTextEditingController.text.isEmpty) {
-                              "Please Enter Email id";
-                            } else if (!RegExp(
-                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(_emailTextEditingController.text)) {
-                              "Not a valid Email";
-                            }*/
-
-                            formKey.currentState!.save();
-                            signIn(context);
-                            print("valid");
-                          }
-                        },
                       ),
+                      CustomizedButton(
+                          name: "Login",
+                          marginTop: 0,
+                          marginBottom: 20,
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              signIn(context);
+                              print("valid");
+                            }
+                          }),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.topRight,

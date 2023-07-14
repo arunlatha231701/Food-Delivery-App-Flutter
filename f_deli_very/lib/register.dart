@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_deli_very/CustomizedWidgets/CustomizedButton.dart';
+import 'package:f_deli_very/CustomizedWidgets/CustomizedTextFormField.dart';
 import 'package:f_deli_very/ModelClass/UserDetailsRealm.dart';
 import 'package:f_deli_very/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -82,13 +84,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         margin: const EdgeInsets.only(
                           bottom: 15,
                         ),
-                        child: TextFormField(
+                        child: CustomizedTextFormField(
                           controller: _nameTextEditingController,
                           focusNode: userNameFocusNode,
-                          onFieldSubmitted: (value) {
-                            FocusScope.of(context).requestFocus(emailFocusNode);
-                          },
-                          onSaved: (value) {
+                          hintText: "User name",
+                          textInputType: TextInputType.name,
+                          focusNodeNext: emailFocusNode,
+                          prefixIcon: Icons.person_2_outlined,
+                          obscureText: false,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onsaved: (value) {
                             _nameTextEditingController.text = value!;
                           },
                           validator: (userNameValue) {
@@ -97,53 +102,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                             return null;
                           },
-                          autofocus: true,
-                          style: TextStyle(color: Colors.grey.shade400),
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.person_2_outlined,
-                              color: Colors.grey.shade400,
-                            ),
-                            hintText: "Username",
-                            hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 15),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    color: Colors.grey.shade200,
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    width: 1)),
-                            errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200,
-                                    width: 1.0)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                  style: BorderStyle.solid,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Colors.grey.shade200,
-                                  width: 1.0,
-                                )),
-                          ),
-                          keyboardType: TextInputType.text,
                         ),
                       ),
                       Container(
@@ -152,15 +110,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         margin: const EdgeInsets.only(
                           bottom: 15,
                         ),
-                        child: TextFormField(
+                        child: CustomizedTextFormField(
+                          controller: _emailTextEditingController,
                           focusNode: emailFocusNode,
-                          onFieldSubmitted: (value) {
-                            FocusScope.of(context)
-                                .requestFocus(passwordFocusNode);
-                          },
-                          onSaved: (value) {
-                            _emailTextEditingController.text = value!;
-                          },
+                          hintText: "Email",
+                          textInputType: TextInputType.emailAddress,
+                          focusNodeNext: passwordFocusNode,
+                          prefixIcon: Icons.person_2_outlined,
+                          obscureText: false,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (email) {
                             if (email!.isEmpty) {
                               return "Please Enter Email";
@@ -171,168 +129,64 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                             return null;
                           },
-                          autofocus: true,
-                          controller: _emailTextEditingController,
-                          style: TextStyle(color: Colors.grey.shade400),
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.person_2_outlined,
-                              color: Colors.grey.shade400,
-                            ),
-                            hintText: "email",
-                            hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 15),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    color: Colors.grey.shade200,
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    width: 1)),
-                            errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200,
-                                    width: 1.0)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                  style: BorderStyle.solid,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Colors.grey.shade200,
-                                  width: 1.0,
-                                )),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
+                          onsaved: (value) {
+                            _emailTextEditingController.text = value!;
+                          },
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(
-                          bottom: 25,
-                        ),
-                        child: TextFormField(
-                          focusNode: passwordFocusNode,
-                          autofocus: true,
-                          controller: _passwordTextEditingController,
-                          onSaved: (value) {
-                            _passwordTextEditingController.text = value!;
-                          },
-                          validator: (password) {
-                            if (password!.isEmpty) {
-                              return "Please Enter Password";
-                            } else if (password.length < 8) {
-                              return "Password length is low";
-                            }
-                            return null;
-                          },
-                          style: TextStyle(color: Colors.grey.shade400),
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.lock_outline_rounded,
-                              color: Colors.grey.shade400,
-                            ),
-                            hintText: "password",
-                            hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 15),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    color: Colors.grey.shade200,
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter)),
-                            errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200,
-                                    width: 1.0)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                  color: Colors.grey.shade200,
-                                  style: BorderStyle.solid,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  width: 1.0,
-                                )),
-                          ),
-                          keyboardType: TextInputType.visiblePassword,
-                        ),
-                      ),
-                      InkWell(
-                        child: Container(
                           width: MediaQuery.of(context).size.width * 0.85,
-                          height: 55,
-                          margin: const EdgeInsets.only(
-                            bottom: 15,
-                          ),
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: Colors.deepOrangeAccent,
-                              borderRadius: BorderRadius.circular(50)),
-                          child: const Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                                color: Colors.white),
+                          margin: const EdgeInsets.only(
+                            bottom: 25,
                           ),
-                        ),
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            var userDetails = ModelUserDetailsRealm(
-                                _nameTextEditingController.text,
-                                _emailTextEditingController.text,
-                                _passwordTextEditingController.text);
-                            realm.write(() {
-                              realm.add(userDetails);
-                            });
+                          child: CustomizedTextFormField(
+                            controller: _passwordTextEditingController,
+                            focusNode: passwordFocusNode,
+                            hintText: "Password",
+                            textInputType: TextInputType.visiblePassword,
+                            focusNodeNext: null,
+                            prefixIcon: Icons.lock_outline_rounded,
+                            obscureText: true,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (password) {
+                              if (password!.isEmpty) {
+                                return "Please Enter Password";
+                              } else if (password.length < 8) {
+                                return "Password length is low";
+                              }
+                              return null;
+                            },
+                            onsaved: (value) {
+                              _passwordTextEditingController.text = value!;
+                            },
+                          )),
+                      CustomizedButton(
+                          name: "Register",
+                          marginTop: 0,
+                          marginBottom: 15,
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              var userDetails = ModelUserDetailsRealm(
+                                  _nameTextEditingController.text,
+                                  _emailTextEditingController.text,
+                                  _passwordTextEditingController.text);
+                              realm.write(() {
+                                realm.add(userDetails);
+                              });
 
-                            formKey.currentState!.save();
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                    email: _emailTextEditingController.text,
-                                    password:
-                                        _passwordTextEditingController.text)
-                                .then((value) {
-                              _saveDataInFireStoreCloud();
-                            }).onError((error, stackTrace) {
-
-                            });
-                          }
-                        },
-                      ),
+                              formKey.currentState!.save();
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: _emailTextEditingController.text,
+                                      password:
+                                          _passwordTextEditingController.text)
+                                  .then((value) {
+                                _saveDataInFireStoreCloud();
+                              }).onError((error, stackTrace) {});
+                            }
+                          }),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.topRight,

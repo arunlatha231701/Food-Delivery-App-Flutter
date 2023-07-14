@@ -14,9 +14,9 @@ class CustomizedTextFormField extends StatefulWidget {
       required this.obscureText,
       this.suffixIcon,
       required this.autovalidateMode,
-      this.onsaved, required this.name})
+      this.onsaved })
       : super(key: key);
-  final String name;
+
   final TextEditingController controller;
   final FocusNode focusNode;
   final FocusNode? focusNodeNext;
@@ -56,7 +56,7 @@ class _CustomizedTextFormFieldState extends State<CustomizedTextFormField> {
           widget.prefixIcon,
           color: Colors.grey.shade400,
         ),
-        hintText: widget.name,
+        hintText: widget.hintText,
         hintStyle: TextStyle(
             color: Colors.grey.shade400,
             fontWeight: FontWeight.bold,
