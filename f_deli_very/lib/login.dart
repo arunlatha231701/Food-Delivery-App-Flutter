@@ -143,65 +143,6 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                           }, name: 'Password',
                         )
 
-                        /*TextFormField(
-                          cursorColor: Colors.deepOrangeAccent,
-                          controller: _passwordTextEditingController,
-                          focusNode: passwordFocusNode,
-                          onSaved: (value) {
-                            _passwordTextEditingController.text = value!;
-                          },
-                          validator: (password) {
-                            if (password!.isEmpty) {
-                              return "Please Enter Password";
-                            } else if (password.length < 8) {
-                              return "Password length is low";
-                            }
-                            return null;
-                          },
-                          style: TextStyle(color: Colors.grey.shade400),
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 15),
-                            filled: true,
-                            fillColor: Colors.grey.shade50,
-                            prefixIcon: Icon(
-                              Icons.lock_outline_rounded,
-                              color: Colors.grey.shade400,
-                            ),
-                            hintText: "Password",
-                            hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50),
-                                borderSide:
-                                    BorderSide(color: Colors.grey.shade200)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50),
-                                borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200,
-                                    width: 1)),
-                            errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200,
-                                    width: 1.0)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                  style: BorderStyle.solid,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Colors.grey.shade200,
-                                  width: 1.0,
-                                )),
-                          ),
-                          keyboardType: TextInputType.visiblePassword,
-                        )*/
                         ,
                       ),
                       InkWell(
