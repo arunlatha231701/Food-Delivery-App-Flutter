@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:realm/realm.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -26,6 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   FocusNode passwordFocusNode = FocusNode();
   final config = Configuration.local([ModelUserDetailsRealm.schema]);
   late final realm = Realm(config);
+
   void _saveDataInFireStoreCloud() {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     firestoreInstance.collection("user").doc(firebaseUser?.uid).set({
@@ -37,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           MaterialPageRoute(builder: (context) => const LoginScreenPage()));
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +98,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return null;
                           },
                           autofocus: true,
-
                           style: TextStyle(color: Colors.grey.shade400),
                           decoration: InputDecoration(
                             prefixIcon: Icon(
@@ -123,13 +125,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 borderSide: BorderSide(
                                     color: Colors.grey.shade200,
                                     style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,width: 1)),
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    width: 1)),
                             errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
                                     style: BorderStyle.solid,
                                     strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200, width: 1.0)),
+                                    color: Colors.grey.shade200,
+                                    width: 1.0)),
                             focusedErrorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
@@ -196,13 +200,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 borderSide: BorderSide(
                                     color: Colors.grey.shade200,
                                     style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,width: 1)),
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                    width: 1)),
                             errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
                                     style: BorderStyle.solid,
                                     strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200, width: 1.0)),
+                                    color: Colors.grey.shade200,
+                                    width: 1.0)),
                             focusedErrorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
@@ -269,7 +275,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 borderSide: BorderSide(
                                     style: BorderStyle.solid,
                                     strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200, width: 1.0)),
+                                    color: Colors.grey.shade200,
+                                    width: 1.0)),
                             focusedErrorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
@@ -303,24 +310,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         onTap: () {
-                          if(formKey.currentState!.validate()){
-
-                            var userDetails = ModelUserDetailsRealm(_nameTextEditingController.text, _emailTextEditingController.text, _passwordTextEditingController.text);
-                            realm.write((){
+                          if (formKey.currentState!.validate()) {
+                            var userDetails = ModelUserDetailsRealm(
+                                _nameTextEditingController.text,
+                                _emailTextEditingController.text,
+                                _passwordTextEditingController.text);
+                            realm.write(() {
                               realm.add(userDetails);
                             });
 
                             formKey.currentState!.save();
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
-                                email: _emailTextEditingController.text,
-                                password: _passwordTextEditingController.text)
+                                    email: _emailTextEditingController.text,
+                                    password:
+                                        _passwordTextEditingController.text)
                                 .then((value) {
-
                               _saveDataInFireStoreCloud();
-                            }).onError((error, stackTrace) {});
-                          }
+                            }).onError((error, stackTrace) {
 
+                            });
+                          }
                         },
                       ),
                       Container(

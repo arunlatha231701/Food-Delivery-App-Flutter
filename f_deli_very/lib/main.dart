@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:f_deli_very/OnBoardingScreens/onBoardScreen.dart';
 import 'package:f_deli_very/HomeLandingScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -59,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       await Future.delayed(const Duration(seconds: 3)).then((value) => {
             Navigator.of(context).pushReplacement(CupertinoPageRoute(
-                builder: (context) => const OnBoardingPage()))
+                builder: (context) => const OnBoardingScreens()))
           });
     }
   }

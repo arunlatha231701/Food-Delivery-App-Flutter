@@ -1,3 +1,4 @@
+import 'package:f_deli_very/CustomizedWidgets/CustomizedTextFormField.dart';
 import 'package:f_deli_very/HomeLandingScreen.dart';
 import 'package:f_deli_very/ModelClass/UserDetailsRealm.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,9 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late String _email, _password;
   late final TextEditingController _emailTextEditingController =
-  TextEditingController();
+      TextEditingController();
   late final TextEditingController _passwordTextEditingController =
-  TextEditingController();
+      TextEditingController();
   late SharedPreferences prefs;
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
@@ -26,22 +27,24 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
   void signIn(BuildContext context) async {
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(
-        email: _emailTextEditingController.text,
-        password: _passwordTextEditingController.text)
+            email: _emailTextEditingController.text,
+            password: _passwordTextEditingController.text)
         .catchError((onError) {
       return onError;
-    }).then((authUser) async =>
-    {
-      if (authUser.user != null)
-        {
-          prefs = await SharedPreferences.getInstance(),
-          prefs.setString("userId", authUser.user!.uid.characters.first),
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (BuildContext context,) {
-                return BottomNavigationPage();
-              }), (route) => false)
-        }
-    });
+    }).then((authUser) async => {
+              if (authUser.user != null)
+                {
+                  prefs = await SharedPreferences.getInstance(),
+                  prefs.setString(
+                      "userId", authUser.user!.uid.characters.first),
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (
+                    BuildContext context,
+                  ) {
+                    return BottomNavigationPage();
+                  }), (route) => false)
+                }
+            });
   }
 
   @override
@@ -60,10 +63,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
         },
         child: Container(
           color: Colors.white,
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
+          height: MediaQuery.of(context).size.height,
           child: Form(
             key: formKey,
             child: CustomScrollView(
@@ -85,96 +85,65 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         ),
                       ),
                       Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.85,
+                        width: MediaQuery.of(context).size.width * 0.85,
                         alignment: Alignment.center,
                         margin: const EdgeInsets.only(
                           bottom: 15,
                         ),
-                        child: TextFormField(
+                        child: CustomizedTextFormField(
                           controller: _emailTextEditingController,
                           focusNode: emailFocusNode,
-                          onFieldSubmitted: (value) {
-                            FocusScope.of(context)
-                                .requestFocus(passwordFocusNode);
-                          },
-                          onSaved: (value) {
+                          hintText: "Enter email ",
+                          textInputType: TextInputType.text,
+                          prefixIcon: Icons.person_2_outlined,
+                          focusNodeNext: passwordFocusNode,
+                          obscureText: false,
+                          onsaved: (value) {
                             _emailTextEditingController.text = value!;
                           },
                           validator: (email) {
                             if (email!.isEmpty) {
                               return "Please Enter Email id";
                             } else if (!RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(email)) {
                               return "Not a valid Email";
                             }
                             return null;
                           },
-                          autofocus: true,
-                          cursorColor: Colors.deepOrangeAccent,
-                          style: TextStyle(color: Colors.grey.shade400),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey.shade50,
-                            prefixIcon: Icon(
-                              Icons.person_2_outlined,
-                              color: Colors.grey.shade400,
-                            ),
-                            hintText: "Username",
-                            hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            contentPadding:
-                            const EdgeInsets.symmetric(vertical: 15),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                BorderSide(color: Colors.grey.shade200)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide:
-                                BorderSide(color: Colors.grey.shade200)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    color: Colors.grey.shade200,
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    width: 1)),
-                            errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                    style: BorderStyle.solid,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200, width: 1.0)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(35),
-                                borderSide: BorderSide(
-                                  style: BorderStyle.solid,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Colors.grey.shade200,
-                                  width: 1.0,
-                                )),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          name: 'Username',
                         ),
                       ),
                       Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.85,
+                        width: MediaQuery.of(context).size.width * 0.85,
                         alignment: Alignment.center,
                         margin: const EdgeInsets.only(
                           bottom: 32,
                         ),
+                        child:  CustomizedTextFormField(
+                          focusNodeNext: null,
+                          obscureText: true,
+                          focusNode: passwordFocusNode,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          prefixIcon: Icons.lock_outline_rounded,
+                          textInputType: TextInputType.visiblePassword,
+                          hintText: 'Enter Password',
+                          controller: _passwordTextEditingController,
+                          validator: (password) {
+                            if (password!.isEmpty) {
+                              return "Please Enter Password";
+                            } else if (password.length < 8) {
+                              return "Password length is low";
+                            }
+                            return null;
+                          },
+                          onsaved: (value){
+                            _passwordTextEditingController.text = value!;
+                          }, name: 'Password',
+                        )
 
-                        child: TextFormField(
+                        /*TextFormField(
                           cursorColor: Colors.deepOrangeAccent,
                           controller: _passwordTextEditingController,
                           focusNode: passwordFocusNode,
@@ -190,17 +159,15 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                             return null;
                           },
                           style: TextStyle(color: Colors.grey.shade400),
-
                           decoration: InputDecoration(
                             contentPadding:
-                            const EdgeInsets.symmetric(vertical: 15),
+                                const EdgeInsets.symmetric(vertical: 15),
                             filled: true,
                             fillColor: Colors.grey.shade50,
                             prefixIcon: Icon(
                               Icons.lock_outline_rounded,
                               color: Colors.grey.shade400,
                             ),
-
                             hintText: "Password",
                             hintStyle: TextStyle(
                                 color: Colors.grey.shade400,
@@ -209,20 +176,21 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(50),
                                 borderSide:
-                                BorderSide(color: Colors.grey.shade200)),
+                                    BorderSide(color: Colors.grey.shade200)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(50),
-                                borderSide:
-                                BorderSide(
+                                borderSide: BorderSide(
                                     style: BorderStyle.solid,
                                     strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200, width: 1)),
+                                    color: Colors.grey.shade200,
+                                    width: 1)),
                             errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
                                     style: BorderStyle.solid,
                                     strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Colors.grey.shade200, width: 1.0)),
+                                    color: Colors.grey.shade200,
+                                    width: 1.0)),
                             focusedErrorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(35),
                                 borderSide: BorderSide(
@@ -233,14 +201,12 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                                 )),
                           ),
                           keyboardType: TextInputType.visiblePassword,
-                        ),
+                        )*/
+                        ,
                       ),
                       InkWell(
                         child: Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width * 0.85,
+                          width: MediaQuery.of(context).size.width * 0.85,
                           height: 55,
                           margin: const EdgeInsets.only(
                             bottom: 20,
@@ -260,6 +226,14 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         ),
                         onTap: () {
                           if (formKey.currentState!.validate()) {
+                            /* if (_emailTextEditingController.text.isEmpty) {
+                              "Please Enter Email id";
+                            } else if (!RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(_emailTextEditingController.text)) {
+                              "Not a valid Email";
+                            }*/
+
                             formKey.currentState!.save();
                             signIn(context);
                             print("valid");
@@ -267,10 +241,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         },
                       ),
                       Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         alignment: Alignment.topRight,
                         margin: const EdgeInsets.only(right: 30, bottom: 70),
                         child: Text(
@@ -282,10 +253,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                         ),
                       ),
                       Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
                         margin: const EdgeInsets.only(top: 40),
                         child: Row(
                           children: [
@@ -302,10 +270,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                               width: 3,
                             ),
                             Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * 0.37,
+                              width: MediaQuery.of(context).size.width * 0.37,
                               child: Text(
                                 "Or connect with",
                                 style: TextStyle(
@@ -323,16 +288,10 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * 0.45,
+                              width: MediaQuery.of(context).size.width * 0.45,
                               child: Image.asset(
                                 "assets/landing_food_logo.png",
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width * 0.45,
+                                width: MediaQuery.of(context).size.width * 0.45,
                                 alignment: Alignment.bottomLeft,
                               ),
                             ),
