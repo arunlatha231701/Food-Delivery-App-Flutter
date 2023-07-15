@@ -7,13 +7,15 @@ class CustomizedButton extends StatefulWidget {
       {Key? key,
       required this.name,
       required this.marginTop,
-      required this.marginBottom, required this.onTap})
+      required this.marginBottom,
+      required this.onTap})
       : super(key: key);
   final String name;
   final double marginTop;
   final double marginBottom;
 
   final void Function()? onTap;
+
   @override
   State<CustomizedButton> createState() => _CustomizedButtonState();
 }

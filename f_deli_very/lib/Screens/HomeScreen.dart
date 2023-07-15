@@ -19,6 +19,12 @@ class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late String UserName;
 
+  List imageList = [
+    "assets/delivery_logo.png",
+    "assets/fast-food_logo.png",
+    "assets/hotfood_logo.png"
+  ];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -40,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
           body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -67,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const Flexible(
                       child: Text(
-                        "b-14,kumaran colony ammapalayam,tirupur",
+                        "B-14,Kumaran Colony Ammapalayam,tirupur",
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
@@ -156,26 +163,29 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SliverPadding(
-            padding:const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
             sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   return Card(
-                      color: Colors.grey.shade100,
+                      elevation: 0.5,
+                      color: Colors.grey.shade200,
                       child: Container(
                           alignment: Alignment.center,
-                          child:const Padding(
-                            padding:  EdgeInsets.all(8.0),
-                            child:  FittedBox(
-                              child: Image(
-                                  image: AssetImage(
-                                "assets/burger.png",
-                              )),
-                            ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image(
+                                alignment: Alignment.center,
+                                fit: BoxFit.contain,
+                                width: 50,
+                                height: 50,
+                                image: AssetImage(
+                                  imageList[index]
+                                )),
                           )));
                 }, childCount: 3),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    mainAxisSpacing: 15,
+                    mainAxisSpacing: 35,
                     childAspectRatio: 1.3)),
           ),
         ],
