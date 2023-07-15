@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     "assets/fast-food_logo.png",
     "assets/hotfood_logo.png"
   ];
+  List nameList = ["Services", "Snacks", "Meals"];
 
   @override
   void initState() {
@@ -46,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
           body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -163,30 +163,43 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             sliver: SliverGrid(
+
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  return Card(
-                      elevation: 0.5,
-                      color: Colors.grey.shade200,
-                      child: Container(
+                  return Column(
+                    children: [
+                      Card(
+                          elevation: 0.5,
+                          color: Colors.grey.shade200,
+                          child: Container(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Image(
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.contain,
+                                    width: 50,
+                                    height: 50,
+                                    image: AssetImage(imageList[index])),
+                              ))),
+                      Container(
+                          margin: const EdgeInsets.only(top: 0),
                           alignment: Alignment.center,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image(
-                                alignment: Alignment.center,
-                                fit: BoxFit.contain,
-                                width: 50,
-                                height: 50,
-                                image: AssetImage(
-                                  imageList[index]
-                                )),
-                          )));
-                }, childCount: 3),
+                          child: Text(
+                            nameList[index],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15),
+                          ))
+                    ],
+                  );
+                }, childCount: imageList.length),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     mainAxisSpacing: 35,
-                    childAspectRatio: 1.3)),
+                    childAspectRatio: 0.9)),
           ),
         ],
       )),
