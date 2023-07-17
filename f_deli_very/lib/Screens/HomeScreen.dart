@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   void _saveDataInSharedPreferences() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      UserName = (preferences.getString("userId") ?? null)!;
+      UserName = (preferences.getString("userId"))!;
     });
   }
 
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(right: 20),
-                        child: Icon(
+                        child: const Icon(
                           Icons.mic,
                           color: Colors.deepOrangeAccent,
                           size: 21,
@@ -201,6 +201,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 35,
                     childAspectRatio: 0.9)),
           ),
+
         ],
       )),
     );
